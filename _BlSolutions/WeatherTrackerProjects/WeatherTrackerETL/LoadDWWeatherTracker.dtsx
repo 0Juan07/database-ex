@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="LoadDWWeatherTracker"
   DTS:PackageType="5"
-  DTS:VersionBuild="18"
-  DTS:VersionGUID="{A1AD9ED0-63CA-4B1B-9867-1B1F40476CB4}">
+  DTS:VersionBuild="19"
+  DTS:VersionGUID="{E4197626-D4ED-4F42-B137-B352A4753392}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
