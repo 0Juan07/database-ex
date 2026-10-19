@@ -3,7 +3,7 @@
     <Configuration>
       <Name>Development</Name>
       <Options>
-        <TargetServer>Born_Again\SQLEXPRESS</TargetServer>
+        <TargetServer>(local)</TargetServer>
         <TargetDatabase>WeatherTrackerCubes</TargetDatabase>
         <StartObject>
           <ObjectId></ObjectId>

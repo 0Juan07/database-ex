@@ -1,6 +1,9 @@
 <Solution>
   <Configurations>
+    <BuildType Name="Debug" />
+    <BuildType Name="DebugLocal" />
     <BuildType Name="Development" />
+    <BuildType Name="Release" />
     <Platform Name="Default" />
   </Configurations>
   <Folder Name="/SoluitionDocuments/">
@@ -11,11 +14,15 @@
   <Folder Name="/WeatherTrackerDataWarehouse/">
     <File Path="InstWeatherTrackerDW.sql" />
   </Folder>
+  <Project Path="Weather/Weather.rptproj">
+    <BuildType Solution="Development|*" Project="Release" />
+    <Deploy Solution="Debug|*" />
+    <Deploy Solution="Development|*" />
+    <Deploy Solution="Release|*" />
+  </Project>
   <Project Path="WeatherTrackerCubes/WeatherTrackerCubes.dwproj" Type="d2abab84-bf74-430a-b69e-9dc6d40dda17">
+    <BuildType Project="Development" />
     <Platform Project="?" />
     <Deploy />
-  </Project>
-  <Project Path="WeatherTrackerETL/WeatherTrackerETL.dtproj" Type="c9674dcb-5085-4a16-b785-4c70dd1589bd">
-    <Platform Project="?" />
   </Project>
 </Solution>

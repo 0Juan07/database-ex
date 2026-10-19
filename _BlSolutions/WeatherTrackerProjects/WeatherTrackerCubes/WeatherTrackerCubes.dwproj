@@ -48,7 +48,7 @@
           <ConfigurationSetting>
             <Id>DWWeatherTracker</Id>
             <Name>DWWeatherTracker</Name>
-            <Value xsi:type="xsd:string">Provider=SQLOLEDB.1;Data Source=Born_Again\SQLEXPRESS;Integrated Security=SSPI;Initial Catalog=DWWeatherTracker</Value>
+            <Value xsi:type="xsd:string">Provider=SQLOLEDB.1;Data Source=.;Integrated Security=SSPI;Initial Catalog=DWWeatherTracker</Value>
           </ConfigurationSetting>
         </ConnectionMappings>
         <ConnectionSecurityMappings>

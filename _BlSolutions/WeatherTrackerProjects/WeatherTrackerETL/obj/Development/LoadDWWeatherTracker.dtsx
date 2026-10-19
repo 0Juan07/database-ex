@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="LoadDWWeatherTracker"
   DTS:PackageType="5"
-  DTS:VersionBuild="18"
-  DTS:VersionGUID="{A1AD9ED0-63CA-4B1B-9867-1B1F40476CB4}">
+  DTS:VersionBuild="21"
+  DTS:VersionGUID="{346ADA41-8A86-481C-A9A8-DD13D33352BF}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -26,7 +26,7 @@
         <DTS:ConnectionManager
           DTS:ConnectRetryCount="1"
           DTS:ConnectRetryInterval="5"
-          DTS:ConnectionString="Data Source=Born_Again\SQLEXPRESS;Initial Catalog=DWWeatherTracker;Provider=SQLOLEDB.1;Integrated Security=SSPI;Application Name=SSIS-LoadDWWeatherTracker-{41C0C38E-7832-49EC-A9C3-3E60BB0E4271}(local).DWWeatherTracker;" />
+          DTS:ConnectionString="Data Source=(local);Initial Catalog=DWWeatherTracker;Provider=SQLOLEDB.1;Integrated Security=SSPI;Application Name=SSIS-LoadDWWeatherTracker-{41C0C38E-7832-49EC-A9C3-3E60BB0E4271}(local).DWWeatherTracker;" />
       </DTS:ObjectData>
     </DTS:ConnectionManager>
     <DTS:ConnectionManager
@@ -52,7 +52,7 @@
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="Date"
-              DTS:DTSID="{085B0225-1FB6-4958-B366-DFA7607A9000}"
+              DTS:DTSID="{2B9D3E00-880D-409B-921F-CADCE4322FB9}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -61,7 +61,7 @@
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="Max TemperatureF"
-              DTS:DTSID="{B89C21B0-6563-4EC3-87D6-2018E282855C}"
+              DTS:DTSID="{F7DCE53E-C1DB-4448-ADB2-C04BD9E8D191}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -70,7 +70,7 @@
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="Min TemperatureF"
-              DTS:DTSID="{7234B9B9-17BD-4CB8-819D-9AA741D61343}"
+              DTS:DTSID="{BC772BD3-6772-49CD-9328-26F506BACE0A}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -79,7 +79,7 @@
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="Events"
-              DTS:DTSID="{CAA843E7-308C-4166-8884-9F0BF8D48EE4}"
+              DTS:DTSID="{53A43C23-DEFC-423E-A9D2-47ADC97FEDCE}"
               DTS:CreationName="" />
           </DTS:FlatFileColumns>
         </DTS:ConnectionManager>

@@ -26,7 +26,7 @@
           <SSIS:Property SSIS:Name="CreatorComputerName">BORN_AGAIN</SSIS:Property>
           <SSIS:Property SSIS:Name="Description">
           </SSIS:Property>
-          <SSIS:Property SSIS:Name="PasswordVerifier" SSIS:Sensitive="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAUEGwF+F1sECO8BuNC2fIngAAAAACAAAAAAAQZgAAAAEAACAAAACfqeYxMWI11u7ZINMnyB3NjjEF9S5bP9/m7s2pWcycuQAAAAAOgAAAAAIAACAAAAAt1qj65mws9THined4/9ZViOQUdMskSv3TAFDbplWq+pAAAADOXtI4sv/iHIosORFQQNG5rX5UkB7D8iIliVXlKSD6+GVYfihAM15hkLtEWOUmk2TFrFKBfvF1agQjF2n/anS9VmWIlBRGfKIRoEIhAWYt90hbpl5E1vxOiHd+1Iakk+G1oHJv9QbiquDS61p7aeJWyEI9IkKz1wXEDDeRY8Q4OMp9r+ASt3vJw5JEDl2NaO1AAAAA+HP4mTip8XyL3IT8WQSek/WnVt7/UrPt2erY+EgZYjbgva2HJBvFpmj806nDqaWNjMxeT4GcZ1p6pQrdEimebg==</SSIS:Property>
+          <SSIS:Property SSIS:Name="PasswordVerifier" SSIS:Sensitive="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAUEGwF+F1sECO8BuNC2fIngAAAAACAAAAAAAQZgAAAAEAACAAAACkYuZRoCEVBFyXLsEFXywdTSFl/FO0wkJRSt96dN+LVwAAAAAOgAAAAAIAACAAAABWSl/wgCDGa9rWyDYinJ525ShcJ833RaoL3uyn/oMWAZAAAAAPRKKCEvnJrDiOe+G3QTIGAb6GU+BeU1y3kHoMd2QioNP3oVt8q0g8lseqKfu805L3Sn51wsitSziXiQge9V2QoaTTiimwPxbwqrP23bEJGA4QlSuuQdkZsTZU94aonw3xJEfF2N/xvxUCyIzCvFMV2ekqIv0XJ6QNeJU/WE918f20eTPdG9gSF04FZ7/VbDhAAAAALGt3pMT62gE+WwNHFChRovd+Nt/M4UgGAa9B4JEFAeHyhWTg2YVFWSM5WPmXF+J1Ky3G6qGbj3Kg4uymrDpOHQ==</SSIS:Property>
           <SSIS:Property SSIS:Name="FormatVersion">1</SSIS:Property>
         </SSIS:Properties>
         <SSIS:Packages>
@@ -42,10 +42,10 @@
                 <SSIS:Property SSIS:Name="Name">LoadDWWeatherTracker</SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionMajor">1</SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionMinor">0</SSIS:Property>
-                <SSIS:Property SSIS:Name="VersionBuild">18</SSIS:Property>
+                <SSIS:Property SSIS:Name="VersionBuild">21</SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionComments">
                 </SSIS:Property>
-                <SSIS:Property SSIS:Name="VersionGUID">{A1AD9ED0-63CA-4B1B-9867-1B1F40476CB4}</SSIS:Property>
+                <SSIS:Property SSIS:Name="VersionGUID">{346ADA41-8A86-481C-A9A8-DD13D33352BF}</SSIS:Property>
                 <SSIS:Property SSIS:Name="PackageFormatVersion">8</SSIS:Property>
                 <SSIS:Property SSIS:Name="Description">
                 </SSIS:Property>
@@ -78,7 +78,7 @@
                     <SSIS:Property SSIS:Name="IncludeInDebugDump">0</SSIS:Property>
                     <SSIS:Property SSIS:Name="Required">0</SSIS:Property>
                     <SSIS:Property SSIS:Name="Sensitive">0</SSIS:Property>
-                    <SSIS:Property SSIS:Name="Value">Data Source=Born_Again\SQLEXPRESS;Initial Catalog=DWWeatherTracker;Provider=SQLOLEDB.1;Integrated Security=SSPI;Application Name=SSIS-LoadDWWeatherTracker-{41C0C38E-7832-49EC-A9C3-3E60BB0E4271}(local).DWWeatherTracker;</SSIS:Property>
+                    <SSIS:Property SSIS:Name="Value">Data Source=(local);Initial Catalog=DWWeatherTracker;Provider=SQLOLEDB.1;Integrated Security=SSPI;Application Name=SSIS-LoadDWWeatherTracker-{41C0C38E-7832-49EC-A9C3-3E60BB0E4271}(local).DWWeatherTracker;</SSIS:Property>
                     <SSIS:Property SSIS:Name="DataType">18</SSIS:Property>
                   </SSIS:Properties>
                 </SSIS:Parameter>
@@ -182,7 +182,7 @@
                     <SSIS:Property SSIS:Name="IncludeInDebugDump">0</SSIS:Property>
                     <SSIS:Property SSIS:Name="Required">0</SSIS:Property>
                     <SSIS:Property SSIS:Name="Sensitive">0</SSIS:Property>
-                    <SSIS:Property SSIS:Name="Value">Born_Again\SQLEXPRESS</SSIS:Property>
+                    <SSIS:Property SSIS:Name="Value">(local)</SSIS:Property>
                     <SSIS:Property SSIS:Name="DataType">18</SSIS:Property>
                   </SSIS:Properties>
                 </SSIS:Parameter>

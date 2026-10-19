@@ -1,0 +1,1069 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="10/6/2026 3:41:36 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="BORN_AGAIN"
+  DTS:CreatorName="Born_Again\sebos"
+  DTS:DTSID="{08E072D9-F779-43AC-AFDB-DC01A5F85D88}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="17.0.1016.0"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="ETLProcessForDWPubsSales"
+  DTS:PackageType="5"
+  DTS:VersionBuild="17"
+  DTS:VersionGUID="{476A0AD5-4659-46DA-B186-CF0FFFE86B32}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[DWPubsSales]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{6BA795E9-8EB2-4942-A55D-481636CC14B9}"
+      DTS:ObjectName="DWPubsSales">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
+          DTS:ConnectionString="Data Source=(local);Initial Catalog=DWPubsSales;Provider=SQLOLEDB.1;Integrated Security=SSPI;Application Name=SSIS-ETLProcessForDWPubsSales-{6BA795E9-8EB2-4942-A55D-481636CC14B9}(local).DWPubsSales;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Pubs]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{BB2B648A-F44A-4287-AF58-876855940710}"
+      DTS:ObjectName="Pubs">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
+          DTS:ConnectionString="Data Source=(local);Initial Catalog=pubs;Provider=SQLOLEDB.1;Integrated Security=SSPI;Auto Translate=False;Application Name=SSIS-ETLProcessForDWPubsSales-{BB2B648A-F44A-4287-AF58-876855940710}(local).pubs;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\End ETL Process Sequence Containers"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="Sequence Container"
+      DTS:DTSID="{88d8991f-bdf9-454b-b404-0152520002de}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="End ETL Process Sequence Containers">
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\End ETL Process Sequence Containers\Add Foreign Key Constraints Execute SQL Task"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{04ABD333-4959-41E8-B230-36402E2E13A9}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Add Foreign Key Constraints Execute SQL Task"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2025; © 2025 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{6BA795E9-8EB2-4942-A55D-481636CC14B9}"
+              SQLTask:SqlStatementSource="Alter Table [dbo].[DimTitles] With Check Add Constraint [FK_DimTitles_DimPublishers] &#xA;Foreign Key ([PublisherKey]) References [dbo].[DimPublishers] ([PublisherKey])&#xA;&#xA;Alter Table [dbo].[FactTitlesAuthors] With Check Add Constraint [FK_FactTitlesAuthors_DimAuthors] &#xA;Foreign Key ([AuthorKey]) References [dbo].[DimAuthors] ([AuthorKey])&#xA;&#xA;Alter Table [dbo].[FactTitlesAuthors] With Check Add Constraint [FK_FactTitlesAuthors_DimTitles] &#xA;Foreign Key ([TitleKey]) References [dbo].[DimTitles] ([TitleKey])&#xA;&#xA;Alter Table [dbo].[FactSales] With Check Add Constraint [FK_FactSales_DimStores] &#xA;Foreign Key ([StoreKey]) References [dbo].[DimStores] ([Storekey])&#xA;&#xA;Alter Table [dbo].[FactSales] With Check Add Constraint [FK_FactSales_DimTitles] &#xA;Foreign Key ([TitleKey]) References [dbo].[DimTitles] ([TitleKey])&#xA;&#xA;Alter Table [dbo].[FactSales]  With Check Add Constraint [FK_FactSales_DimDates] &#xA;Foreign Key ([OrderDateKey]) References [dbo].[DimDates] ([DateKey]) &#xA;&#xA;Alter Table [dbo].[DimTitles]  With Check Add Constraint [FK_DimTitles_DimDates] &#xA;Foreign Key ([PublishedDateKey]) References [dbo].[DimDates] ([DateKey]) &#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Fill Dimension Tables Sequence Container"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="Sequence Container"
+      DTS:DTSID="{3b8ffff8-d7e2-4eb2-8f35-3348c9cf0ea1}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Fill Dimension Tables Sequence Container">
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Fill Dimension Tables Sequence Container\Add Null Date Lookup Values Execute SQL Task"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{8E0A79EE-A679-4F9C-8801-5D7E96EA90E1}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Add Null Date Lookup Values Execute SQL Task"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2025; © 2025 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Fill Dimension Tables Sequence Container\Fill DimAuthors Data Flow Task"
+          DTS:CreationName="Microsoft.Pipeline"
+          DTS:Description="Data Flow Task"
+          DTS:DTSID="{5608D457-5044-4A64-9764-DED1956DBF88}"
+          DTS:ExecutableType="Microsoft.Pipeline"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Fill DimAuthors Data Flow Task"
+          DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <pipeline
+              version="1">
+              <components>
+                <component
+                  refId="Package\Fill Dimension Tables Sequence Container\Fill DimAuthors Data Flow Task\Fill DimAuthors OLE DB Destination"
+                  componentClassID="Microsoft.OLEDBDestination"
+                  contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+                  description="OLE DB Destination"
+                  name="Fill DimAuthors OLE DB Destination"
+                  usesDispositions="true"
+                  version="4">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset">[dbo].[DimAuthors]</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forces the use of the DefaultCodePage property value when describing character data."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">3</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepIdentity">false</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepNulls">false</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                      name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                      name="FastLoadMaxInsertCommitSize">2147483647</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Fill Dimension Tables Sequence Container\Fill DimAuthors Data Flow Task\Fill DimAuthors OLE DB Destination.Connections[OleDbConnection]"
+                      connectionManagerID="Package.ConnectionManagers[DWPubsSales]"
+                      connectionManagerRefId="Package.ConnectionManagers[DWPubsSales]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <inputs>
+                    <input
+                      refId="Package\Fill Dimension Tables Sequence Container\Fill DimAuthors Data Flow Task\Fill DimAuthors OLE DB Destination.Inputs[OLE DB Destination Input]"
+                      errorOrTruncationOperation="Insert"
+                      errorRowDisposition="FailComponent"
+                      hasSideEffects="true"
+                      name="OLE DB Destination Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Fill Dimension Tables Sequence Container\Fill DimAuthors Data Flow Task\Fill DimAuthors OLE DB Destination.Inputs[OLE DB Destination Input].Columns[AuthorId]"
+                          cachedDataType="wstr"
+                          cachedLength="11"
+                          cachedName="AuthorId"
+                          externalMetadataColumnId="Package\Fill Dimension Tables Sequence Container\Fill DimAuthors Data Flow Task\Fill DimAuthors OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[AuthorId]"
+                          lineageId="Package\Fill Dimension Tables Sequence Container\Fill DimAuthors Data Flow Task\Get Authors Data OLE DB Source.Outputs[OLE DB Source Output].Columns[AuthorId]" />
+                        <inputColumn
+                          refId="Package\Fill Dimension Tables Sequence Container\Fill DimAuthors Data Flow Task\Fill DimAuthors OLE DB Destination.Inputs[OLE DB Destination Input].Columns[AuthorName]"
+                          cachedDataType="wstr"
+                          cachedLength="100"
+                          cachedName="AuthorName"
+                          externalMetadataColumnId="Package\Fill Dimension Tables Sequence Container\Fill DimAuthors Data Flow Task\Fill DimAuthors OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[AuthorName]"
+                          lineageId="Package\Fill Dimension Tables Sequence Container\Fill DimAuthors Data Flow Task\Get Authors Data OLE DB Source.Outputs[OLE DB Source Output].Columns[AuthorName]" />
+                        <inputColumn
+                          refId="Package\Fill Dimension Tables Sequence Container\Fill DimAuthors Data Flow Task\Fill DimAuthors OLE DB Destination.Inputs[OLE DB Destination Input].Columns[AuthorState]"
+                          cachedDataType="wstr"
+                          cachedLength="2"
+                          cachedName="AuthorState"
+                          externalMetadataColumnId="Package\Fill Dimension Tables Sequence Container\Fill DimAuthors Data Flow Task\Fill DimAuthors OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[AuthorState]"
+                          lineageId="Package\Fill Dimension Tables Sequence Container\Fill DimAuthors Data Flow Task\Get Authors Data OLE DB Source.Outputs[OLE DB Source Output].Columns[AuthorState]" />
+                      </inputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Fill Dimension Tables Sequence Container\Fill DimAuthors Data Flow Task\Fill DimAuthors OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[AuthorKey]"
+                          dataType="i4"
+                          name="AuthorKey" />
+                        <externalMetadataColumn
+                          refId="Package\Fill Dimension Tables Sequence Container\Fill DimAuthors Data Flow Task\Fill DimAuthors OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[AuthorId]"
+                          dataType="wstr"
+                          length="11"
+                          name="AuthorId" />
+                        <externalMetadataColumn
+                          refId="Package\Fill Dimension Tables Sequence Container\Fill DimAuthors Data Flow Task\Fill DimAuthors OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[AuthorName]"
+                          dataType="wstr"
+                          length="100"
+                          name="AuthorName" />
+                        <externalMetadataColumn
+                          refId="Package\Fill Dimension Tables Sequence Container\Fill DimAuthors Data Flow Task\Fill DimAuthors OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[AuthorState]"
+                          dataType="wstr"
+                          length="2"
+                          name="AuthorState" />
+                      </externalMetadataColumns>
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Fill Dimension Tables Sequence Container\Fill DimAuthors Data Flow Task\Fill DimAuthors OLE DB Destination.Outputs[OLE DB Destination Error Output]"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="OLE DB Destination Error Output"
+                      synchronousInputId="Package\Fill Dimension Tables Sequence Container\Fill DimAuthors Data Flow Task\Fill DimAuthors OLE DB Destination.Inputs[OLE DB Destination Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Fill Dimension Tables Sequence Container\Fill DimAuthors Data Flow Task\Fill DimAuthors OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Fill Dimension Tables Sequence Container\Fill DimAuthors Data Flow Task\Fill DimAuthors OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Fill Dimension Tables Sequence Container\Fill DimAuthors Data Flow Task\Fill DimAuthors OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Fill Dimension Tables Sequence Container\Fill DimAuthors Data Flow Task\Fill DimAuthors OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Fill Dimension Tables Sequence Container\Fill DimAuthors Data Flow Task\Get Authors Data OLE DB Source"
+                  componentClassID="Microsoft.OLEDBSource"
+                  contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+                  description="OLE DB Source"
+                  name="Get Authors Data OLE DB Source"
+                  usesDispositions="true"
+                  version="7">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset"></property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">Select 
+  [AuthorId] = Cast( au_id as nChar(11) )
+, [AuthorName] = Cast( (au_fname + ' ' + au_lname) as nVarchar(100) )
+, [AuthorState] = Cast( state as nChar(2) )
+From pubs.dbo.authors</property>
+                    <property
+                      dataType="System.String"
+                      description="The variable that contains the SQL command to be executed."
+                      name="SqlCommandVariable"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forces the use of the DefaultCodePage property value when describing character data."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">2</property>
+                    <property
+                      dataType="System.String"
+                      description="The mappings between the parameters in the SQL command and variables."
+                      name="ParameterMapping"></property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Fill Dimension Tables Sequence Container\Fill DimAuthors Data Flow Task\Get Authors Data OLE DB Source.Connections[OleDbConnection]"
+                      connectionManagerID="Package.ConnectionManagers[Pubs]"
+                      connectionManagerRefId="Package.ConnectionManagers[Pubs]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <outputs>
+                    <output
+                      refId="Package\Fill Dimension Tables Sequence Container\Fill DimAuthors Data Flow Task\Get Authors Data OLE DB Source.Outputs[OLE DB Source Output]"
+                      name="OLE DB Source Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Fill Dimension Tables Sequence Container\Fill DimAuthors Data Flow Task\Get Authors Data OLE DB Source.Outputs[OLE DB Source Output].Columns[AuthorId]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Fill Dimension Tables Sequence Container\Fill DimAuthors Data Flow Task\Get Authors Data OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[AuthorId]"
+                          length="11"
+                          lineageId="Package\Fill Dimension Tables Sequence Container\Fill DimAuthors Data Flow Task\Get Authors Data OLE DB Source.Outputs[OLE DB Source Output].Columns[AuthorId]"
+                          name="AuthorId"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Fill Dimension Tables Sequence Container\Fill DimAuthors Data Flow Task\Get Authors Data OLE DB Source.Outputs[OLE DB Source Output].Columns[AuthorName]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Fill Dimension Tables Sequence Container\Fill DimAuthors Data Flow Task\Get Authors Data OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[AuthorName]"
+                          length="100"
+                          lineageId="Package\Fill Dimension Tables Sequence Container\Fill DimAuthors Data Flow Task\Get Authors Data OLE DB Source.Outputs[OLE DB Source Output].Columns[AuthorName]"
+                          name="AuthorName"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Fill Dimension Tables Sequence Container\Fill DimAuthors Data Flow Task\Get Authors Data OLE DB Source.Outputs[OLE DB Source Output].Columns[AuthorState]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Fill Dimension Tables Sequence Container\Fill DimAuthors Data Flow Task\Get Authors Data OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[AuthorState]"
+                          length="2"
+                          lineageId="Package\Fill Dimension Tables Sequence Container\Fill DimAuthors Data Flow Task\Get Authors Data OLE DB Source.Outputs[OLE DB Source Output].Columns[AuthorState]"
+                          name="AuthorState"
+                          truncationRowDisposition="FailComponent" />
+                      </outputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Fill Dimension Tables Sequence Container\Fill DimAuthors Data Flow Task\Get Authors Data OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[AuthorId]"
+                          dataType="wstr"
+                          length="11"
+                          name="AuthorId" />
+                        <externalMetadataColumn
+                          refId="Package\Fill Dimension Tables Sequence Container\Fill DimAuthors Data Flow Task\Get Authors Data OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[AuthorName]"
+                          dataType="wstr"
+                          length="100"
+                          name="AuthorName" />
+                        <externalMetadataColumn
+                          refId="Package\Fill Dimension Tables Sequence Container\Fill DimAuthors Data Flow Task\Get Authors Data OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[AuthorState]"
+                          dataType="wstr"
+                          length="2"
+                          name="AuthorState" />
+                      </externalMetadataColumns>
+                    </output>
+                    <output
+                      refId="Package\Fill Dimension Tables Sequence Container\Fill DimAuthors Data Flow Task\Get Authors Data OLE DB Source.Outputs[OLE DB Source Error Output]"
+                      isErrorOut="true"
+                      name="OLE DB Source Error Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Fill Dimension Tables Sequence Container\Fill DimAuthors Data Flow Task\Get Authors Data OLE DB Source.Outputs[OLE DB Source Error Output].Columns[AuthorId]"
+                          dataType="wstr"
+                          length="11"
+                          lineageId="Package\Fill Dimension Tables Sequence Container\Fill DimAuthors Data Flow Task\Get Authors Data OLE DB Source.Outputs[OLE DB Source Error Output].Columns[AuthorId]"
+                          name="AuthorId" />
+                        <outputColumn
+                          refId="Package\Fill Dimension Tables Sequence Container\Fill DimAuthors Data Flow Task\Get Authors Data OLE DB Source.Outputs[OLE DB Source Error Output].Columns[AuthorName]"
+                          dataType="wstr"
+                          length="100"
+                          lineageId="Package\Fill Dimension Tables Sequence Container\Fill DimAuthors Data Flow Task\Get Authors Data OLE DB Source.Outputs[OLE DB Source Error Output].Columns[AuthorName]"
+                          name="AuthorName" />
+                        <outputColumn
+                          refId="Package\Fill Dimension Tables Sequence Container\Fill DimAuthors Data Flow Task\Get Authors Data OLE DB Source.Outputs[OLE DB Source Error Output].Columns[AuthorState]"
+                          dataType="wstr"
+                          length="2"
+                          lineageId="Package\Fill Dimension Tables Sequence Container\Fill DimAuthors Data Flow Task\Get Authors Data OLE DB Source.Outputs[OLE DB Source Error Output].Columns[AuthorState]"
+                          name="AuthorState" />
+                        <outputColumn
+                          refId="Package\Fill Dimension Tables Sequence Container\Fill DimAuthors Data Flow Task\Get Authors Data OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Fill Dimension Tables Sequence Container\Fill DimAuthors Data Flow Task\Get Authors Data OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Fill Dimension Tables Sequence Container\Fill DimAuthors Data Flow Task\Get Authors Data OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Fill Dimension Tables Sequence Container\Fill DimAuthors Data Flow Task\Get Authors Data OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+              </components>
+              <paths>
+                <path
+                  refId="Package\Fill Dimension Tables Sequence Container\Fill DimAuthors Data Flow Task.Paths[OLE DB Source Output]"
+                  endId="Package\Fill Dimension Tables Sequence Container\Fill DimAuthors Data Flow Task\Fill DimAuthors OLE DB Destination.Inputs[OLE DB Destination Input]"
+                  name="OLE DB Source Output"
+                  startId="Package\Fill Dimension Tables Sequence Container\Fill DimAuthors Data Flow Task\Get Authors Data OLE DB Source.Outputs[OLE DB Source Output]" />
+              </paths>
+            </pipeline>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Fill Dimension Tables Sequence Container\Fill DimDates Execute SQL Task"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{193619DD-0B8D-45C0-A5FB-683EB6CE9E96}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Fill DimDates Execute SQL Task"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2025; © 2025 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Fill Dimension Tables Sequence Container\Fill DimPublishers Data Flow Task"
+          DTS:CreationName="Microsoft.Pipeline"
+          DTS:Description="Data Flow Task"
+          DTS:DTSID="{F38CA7A4-626C-4E92-8883-FC3AEDF47F4D}"
+          DTS:ExecutableType="Microsoft.Pipeline"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Fill DimPublishers Data Flow Task"
+          DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <pipeline
+              version="1" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Fill Dimension Tables Sequence Container\Fill DimStores Data Flow Task"
+          DTS:CreationName="Microsoft.Pipeline"
+          DTS:Description="Data Flow Task"
+          DTS:DTSID="{F8404874-1E29-4E25-8C74-6B9ACE819B18}"
+          DTS:ExecutableType="Microsoft.Pipeline"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Fill DimStores Data Flow Task"
+          DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <pipeline
+              version="1" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Fill Dimension Tables Sequence Container\Fill DimTitles Data Flow Task"
+          DTS:CreationName="Microsoft.Pipeline"
+          DTS:Description="Data Flow Task"
+          DTS:DTSID="{42304E53-8810-47B1-83D1-AB5F2037D3F8}"
+          DTS:ExecutableType="Microsoft.Pipeline"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Fill DimTitles Data Flow Task"
+          DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <pipeline
+              version="1" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+      <DTS:PrecedenceConstraints>
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Fill Dimension Tables Sequence Container.PrecedenceConstraints[Constraint]"
+          DTS:CreationName=""
+          DTS:DTSID="{512D19F1-9AC6-4111-A498-331A2E836913}"
+          DTS:From="Package\Fill Dimension Tables Sequence Container\Fill DimAuthors Data Flow Task"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint"
+          DTS:To="Package\Fill Dimension Tables Sequence Container\Fill DimStores Data Flow Task" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Fill Dimension Tables Sequence Container.PrecedenceConstraints[Constraint 1]"
+          DTS:CreationName=""
+          DTS:DTSID="{F63B4D10-D2BC-4950-BEB0-8AA7C89CE4F2}"
+          DTS:From="Package\Fill Dimension Tables Sequence Container\Fill DimStores Data Flow Task"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 1"
+          DTS:To="Package\Fill Dimension Tables Sequence Container\Fill DimPublishers Data Flow Task" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Fill Dimension Tables Sequence Container.PrecedenceConstraints[Constraint 2]"
+          DTS:CreationName=""
+          DTS:DTSID="{6D543687-9873-4492-B193-9B07D0F124DF}"
+          DTS:From="Package\Fill Dimension Tables Sequence Container\Fill DimPublishers Data Flow Task"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 2"
+          DTS:To="Package\Fill Dimension Tables Sequence Container\Fill DimDates Execute SQL Task" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Fill Dimension Tables Sequence Container.PrecedenceConstraints[Constraint 3]"
+          DTS:CreationName=""
+          DTS:DTSID="{2A622F57-FC99-433A-AC26-B17ABF254C04}"
+          DTS:From="Package\Fill Dimension Tables Sequence Container\Fill DimDates Execute SQL Task"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 3"
+          DTS:To="Package\Fill Dimension Tables Sequence Container\Add Null Date Lookup Values Execute SQL Task" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Fill Dimension Tables Sequence Container.PrecedenceConstraints[Constraint 4]"
+          DTS:CreationName=""
+          DTS:DTSID="{D30BF653-292D-46F4-B561-97328694C100}"
+          DTS:From="Package\Fill Dimension Tables Sequence Container\Add Null Date Lookup Values Execute SQL Task"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 4"
+          DTS:To="Package\Fill Dimension Tables Sequence Container\Fill DimTitles Data Flow Task" />
+      </DTS:PrecedenceConstraints>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Fill Fact Tables Sequence Containers"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="Sequence Container"
+      DTS:DTSID="{F89466B2-DEF0-4DA2-9304-7B16DB108740}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Fill Fact Tables Sequence Containers">
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Fill Fact Tables Sequence Containers\Fill FactSales Data Flow Task"
+          DTS:CreationName="Microsoft.Pipeline"
+          DTS:Description="Data Flow Task"
+          DTS:DTSID="{15F76267-9EC4-4BCD-9F57-562AFE84CDC1}"
+          DTS:ExecutableType="Microsoft.Pipeline"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Fill FactSales Data Flow Task"
+          DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <pipeline
+              version="1" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Fill Fact Tables Sequence Containers\Fill FactTitlesAuthors Data Flow Task"
+          DTS:CreationName="Microsoft.Pipeline"
+          DTS:Description="Data Flow Task"
+          DTS:DTSID="{7D7EAB78-EA24-4E19-993F-499B2B01B851}"
+          DTS:ExecutableType="Microsoft.Pipeline"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Fill FactTitlesAuthors Data Flow Task"
+          DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <pipeline
+              version="1" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+      <DTS:PrecedenceConstraints>
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Fill Fact Tables Sequence Containers.PrecedenceConstraints[Constraint]"
+          DTS:CreationName=""
+          DTS:DTSID="{EBA47283-60C6-4E90-8C61-B836B1AB8368}"
+          DTS:From="Package\Fill Fact Tables Sequence Containers\Fill FactTitlesAuthors Data Flow Task"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint"
+          DTS:To="Package\Fill Fact Tables Sequence Containers\Fill FactSales Data Flow Task" />
+      </DTS:PrecedenceConstraints>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Prepare ETL Process Sequence Container"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="Sequence Container"
+      DTS:DTSID="{0bf6fe91-bed1-4915-8fd3-2cf9bdcab270}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Prepare ETL Process Sequence Container">
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Prepare ETL Process Sequence Container\Drop Foreign Keys Execute SQL Task"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{BC681424-1D07-491D-956B-2F0FA97F6534}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Drop Foreign Keys Execute SQL Task"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2025; © 2025 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{6BA795E9-8EB2-4942-A55D-481636CC14B9}"
+              SQLTask:SqlStatementSource="-- 1a) Drop Foreign Keys &#xA;Alter Table [dbo].[DimTitles] Drop Constraint [FK_DimTitles_DimPublishers] &#xA;Alter Table [dbo].[FactTitlesAuthors] Drop Constraint [FK_FactTitlesAuthors_DimAuthors] &#xA;Alter Table [dbo].[FactTitlesAuthors] Drop Constraint [FK_FactTitlesAuthors_DimTitles] &#xA;Alter Table [dbo].[FactSales] Drop Constraint [FK_FactSales_DimStores] &#xA;Alter Table [dbo].[FactSales] Drop Constraint [FK_FactSales_DimTitles] &#xA;Alter Table [dbo].[FactSales] Drop Constraint [FK_FactSales_DimDates]&#xA;Alter Table [dbo].[DimTitles] Drop Constraint [FK_DimTitles_DimDates] &#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Prepare ETL Process Sequence Container\Truncate Tables Execute SQL Task"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{9E5123E4-061D-4F74-A17F-5F1755AB8EAB}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Truncate Tables Execute SQL Task"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2025; © 2025 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{6BA795E9-8EB2-4942-A55D-481636CC14B9}"
+              SQLTask:SqlStatementSource="Truncate Table dbo.FactSales&#xA;Truncate Table dbo.FactTitlesAuthors&#xA;Truncate Table dbo.DimTitles&#xA;Truncate Table dbo.DimPublishers&#xA;Truncate Table dbo.DimStores&#xA;Truncate Table dbo.DimAuthors&#xA;Truncate Table dbo.DimDates" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+      <DTS:PrecedenceConstraints>
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Prepare ETL Process Sequence Container.PrecedenceConstraints[Constraint]"
+          DTS:CreationName=""
+          DTS:DTSID="{748834AC-FED1-4476-ABE0-5D0CA9FCCF77}"
+          DTS:From="Package\Prepare ETL Process Sequence Container\Drop Foreign Keys Execute SQL Task"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint"
+          DTS:To="Package\Prepare ETL Process Sequence Container\Truncate Tables Execute SQL Task" />
+      </DTS:PrecedenceConstraints>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{3DDF33C2-16DA-486E-AE63-CA2479D0749F}"
+      DTS:From="Package\Prepare ETL Process Sequence Container"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Fill Dimension Tables Sequence Container" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{91024782-618F-4553-A417-884CF9C27DD6}"
+      DTS:From="Package\Fill Dimension Tables Sequence Container"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\Fill Fact Tables Sequence Containers" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
+      DTS:CreationName=""
+      DTS:DTSID="{DE29CAC4-F103-4D39-9DC0-89A00ED18ED2}"
+      DTS:From="Package\Fill Fact Tables Sequence Containers"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 2"
+      DTS:To="Package\End ETL Process Sequence Containers" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="32" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="300,42.6666666666667"
+          Id="Package\End ETL Process Sequence Containers\Add Foreign Key Constraints Execute SQL Task"
+          TopLeft="24.1309309472293,62.6428471803669" />
+        <AnnotationLayout
+          Text="Perform final tasks like replacing the foreign key constraints&#xA;"
+          ParentId="Package\End ETL Process Sequence Containers"
+          FontInfo="{assembly:Null}"
+          Size="344,56"
+          Id="c92f9463-b00c-4b71-8b15-669254d0c3de"
+          TopLeft="3.88886889649831,7.40739142806495" />
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="352.666666666667,160.666666666667"
+          Size="352.666666666667,203.333333333334"
+          Id="Package\End ETL Process Sequence Containers"
+          TopLeft="474.590752593663,470.102183679219" />
+        <NodeLayout
+          Size="304,42.6666666666667"
+          Id="Package\Fill Dimension Tables Sequence Container\Add Null Date Lookup Values Execute SQL Task"
+          TopLeft="3.55356697817999,383.946398097278" />
+        <NodeLayout
+          Size="226.666666666667,42.6666666666667"
+          Id="Package\Fill Dimension Tables Sequence Container\Fill DimAuthors Data Flow Task"
+          TopLeft="40.6071367503279,47.2856940065119" />
+        <NodeLayout
+          Size="229.333333333334,42.6666666666667"
+          Id="Package\Fill Dimension Tables Sequence Container\Fill DimDates Execute SQL Task"
+          TopLeft="46.2991007815913,299.20532825717" />
+        <NodeLayout
+          Size="237.333333333334,42.6666666666667"
+          Id="Package\Fill Dimension Tables Sequence Container\Fill DimPublishers Data Flow Task"
+          TopLeft="36.7008869249509,212.229140747588" />
+        <NodeLayout
+          Size="220,42.6666666666667"
+          Id="Package\Fill Dimension Tables Sequence Container\Fill DimStores Data Flow Task"
+          TopLeft="40.0491010609883,127.848190846188" />
+        <NodeLayout
+          Size="214.666666666667,42.6666666666667"
+          Id="Package\Fill Dimension Tables Sequence Container\Fill DimTitles Data Flow Task"
+          TopLeft="56.1205289139679,468.889859671395" />
+        <EdgeLayout
+          Id="Package\Fill Dimension Tables Sequence Container.PrecedenceConstraints[Constraint]"
+          TopLeft="151.994785572325,89.9523606731786">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,37.8958301730099"
+              Start="0,0"
+              End="0,30.3958301730099">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,30.3958301730099" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Fill Dimension Tables Sequence Container.PrecedenceConstraints[Constraint 1]"
+          TopLeft="152.708327326303,170.514857512855">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,41.7142832347325"
+              Start="0,0"
+              End="0,34.2142832347325">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,34.2142832347325" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Fill Dimension Tables Sequence Container.PrecedenceConstraints[Constraint 2]"
+          TopLeft="158.166660519938,254.895807414254">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,44.309520842916"
+              Start="0,0"
+              End="0,36.809520842916">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,36.809520842916" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Fill Dimension Tables Sequence Container.PrecedenceConstraints[Constraint 3]"
+          TopLeft="158.259667213219,341.871994923837">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,42.0744031734407"
+              Start="0,0"
+              End="0,34.5744031734407">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,34.5744031734407" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Fill Dimension Tables Sequence Container.PrecedenceConstraints[Constraint 4]"
+          TopLeft="159.503714612741,426.613064763944">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,42.2767949074503"
+              Start="0,0"
+              End="0,34.7767949074503">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,34.7767949074503" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <AnnotationLayout
+          Text="Fill dimension tables before filling the fact tables&#xA;"
+          ParentId="Package\Fill Dimension Tables Sequence Container"
+          FontInfo="{assembly:Null}"
+          Size="285.333333333334,56"
+          Id="db06de67-c483-4572-8bf7-fed1360b6ab5"
+          TopLeft="2.61110670285106,2.62961371916367" />
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="333.333333333334,566.666666666667"
+          Size="333.333333333334,609.333333333334"
+          Id="Package\Fill Dimension Tables Sequence Container"
+          TopLeft="87.537198467734,477.832336731988" />
+        <NodeLayout
+          Size="216,42.6666666666667"
+          Id="Package\Fill Fact Tables Sequence Containers\Fill FactSales Data Flow Task"
+          TopLeft="24.8377768987841,131.502966809131" />
+        <NodeLayout
+          Size="252,42.6666666666667"
+          Id="Package\Fill Fact Tables Sequence Containers\Fill FactTitlesAuthors Data Flow Task"
+          TopLeft="10.4404561138231,45.7380890834901" />
+        <EdgeLayout
+          Id="Package\Fill Fact Tables Sequence Containers.PrecedenceConstraints[Constraint]"
+          TopLeft="134.639116506304,88.4047557501568">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,43.0982110589744"
+              Start="0,0"
+              End="0,35.5982110589744">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,35.5982110589744" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <AnnotationLayout
+          Text="Once the dimension tables are full, fill the fact tables&#xA;"
+          ParentId="Package\Fill Fact Tables Sequence Containers"
+          FontInfo="{assembly:Null}"
+          Size="306.666666666667,56"
+          Id="3dde290d-ad86-494f-b25f-c22c1b646bd3"
+          TopLeft="0.861089287119455,5.24072982381927" />
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="312.666666666667,229.333333333334"
+          Size="312.666666666667,272"
+          Id="Package\Fill Fact Tables Sequence Containers"
+          TopLeft="438.789662924255,40.8571409089225" />
+        <NodeLayout
+          Size="253.333333333334,42.6666666666667"
+          Id="Package\Prepare ETL Process Sequence Container\Drop Foreign Keys Execute SQL Task"
+          TopLeft="28,56.309516769364" />
+        <NodeLayout
+          Size="242.666666666667,42.6666666666667"
+          Id="Package\Prepare ETL Process Sequence Container\Truncate Tables Execute SQL Task"
+          TopLeft="33.3571426176598,138.488084279356" />
+        <EdgeLayout
+          Id="Package\Prepare ETL Process Sequence Container.PrecedenceConstraints[Constraint]"
+          TopLeft="154.67857130883,98.9761834360307">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,39.5119008433252"
+              Start="0,0"
+              End="0,32.0119008433252">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,32.0119008433252" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <AnnotationLayout
+          Text="Clear tables before refilling the data warehouse&#xA;"
+          ParentId="Package\Prepare ETL Process Sequence Container"
+          FontInfo="{assembly:Null}"
+          Size="278.666666666667,56"
+          Id="3e01540f-e298-4124-b5bc-9b78deb7cae0"
+          TopLeft="21.9841276404876,19.6296180583817" />
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="305.333333333334,236.666666666667"
+          Size="305.333333333334,279.333333333334"
+          Id="Package\Prepare ETL Process Sequence Container"
+          TopLeft="95.7341227044776,48.6349258498538" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="251.302327252772,327.968259183187">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,149.864077548801"
+              Start="0,0"
+              End="0,142.364077548801">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,142.364077548801" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="308.426087356623,477.832336731988">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="286.696908900966,-164.975195823066"
+              Start="0,0"
+              End="286.696908900966,-157.475195823066">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,-62.4629371707573" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,-62.4629371707573"
+                    Point2="0,-66.4629371707573"
+                    Point3="4,-66.4629371707573" />
+                  <mssgle:LineSegment
+                    End="282.696908900966,-66.4629371707573" />
+                  <mssgle:CubicBezierSegment
+                    Point1="282.696908900966,-66.4629371707573"
+                    Point2="286.696908900966,-66.4629371707573"
+                    Point3="286.696908900966,-70.4629371707573" />
+                  <mssgle:LineSegment
+                    End="286.696908900966,-157.475195823066" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 2]"
+          TopLeft="648.412429981182,312.857140908922">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,157.245042770296"
+              Start="0,0"
+              End="0,149.745042770296">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,149.745042770296" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Fill Dimension Tables Sequence Container\Fill DimAuthors Data Flow Task">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="234.666666666667,42.6666666666667"
+          Id="Package\Fill Dimension Tables Sequence Container\Fill DimAuthors Data Flow Task\Get Authors Data OLE DB Source"
+          TopLeft="237.499989382923,106.599994916916" />
+        <NodeLayout
+          Size="246.666666666667,42.6666666666667"
+          Id="Package\Fill Dimension Tables Sequence Container\Fill DimAuthors Data Flow Task\Fill DimAuthors OLE DB Destination"
+          TopLeft="229.374989746139,224.899989275933" />
+        <EdgeLayout
+          Id="Package\Fill Dimension Tables Sequence Container\Fill DimAuthors Data Flow Task.Paths[OLE DB Source Output]"
+          TopLeft="353.770822897864,149.266661583583">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,75.6333276923499"
+              Start="0,0"
+              End="0,68.1333276923499">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,68.1333276923499" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Fill Dimension Tables Sequence Container\Fill DimAuthors Data Flow Task\Fill DimAuthors OLE DB Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Fill Dimension Tables Sequence Container\Fill DimAuthors Data Flow Task\Get Authors Data OLE DB Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
