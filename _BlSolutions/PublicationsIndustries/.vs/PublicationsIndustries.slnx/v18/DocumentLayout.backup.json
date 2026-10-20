@@ -9,6 +9,10 @@
     {
       "AbsoluteMoniker": "D:0:0:{D04DD632-DFDD-A870-AF97-DB344F8253AA}|DWPubsSalesETL\\DWPubsSalesETL.dtproj|D:\\NAIT\\Semester-4\\Business-intelligence\\workbook\\database-ex\\_BlSolutions\\PublicationsIndustries\\DWPubsSalesETL\\PublicationIndustriesETLCode.sql||{CC5D8DF0-88F4-4BB2-9DBB-B48CEE65C30A}",
       "RelativeMoniker": "D:0:0:{D04DD632-DFDD-A870-AF97-DB344F8253AA}|DWPubsSalesETL\\DWPubsSalesETL.dtproj|solutionrelative:DWPubsSalesETL\\PublicationIndustriesETLCode.sql||{CC5D8DF0-88F4-4BB2-9DBB-B48CEE65C30A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D04DD632-DFDD-A870-AF97-DB344F8253AA}|DWPubsSalesETL\\DWPubsSalesETL.dtproj|D:\\NAIT\\Semester-4\\Business-intelligence\\workbook\\database-ex\\_BlSolutions\\PublicationsIndustries\\DWPubsSalesETL\\PublicationIndustriesETLCode.sql||{CC5D8DF0-88F4-4BB2-9DBB-B48CEE65C30A}|CodeFrame",
+      "RelativeMoniker": "D:0:0:{D04DD632-DFDD-A870-AF97-DB344F8253AA}|DWPubsSalesETL\\DWPubsSalesETL.dtproj|solutionrelative:DWPubsSalesETL\\PublicationIndustriesETLCode.sql||{CC5D8DF0-88F4-4BB2-9DBB-B48CEE65C30A}|CodeFrame"
     }
   ],
   "DocumentGroupContainers": [
@@ -18,7 +22,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 18,
+          "SelectedChildIndex": 19,
           "Children": [
             {
               "$type": "Bookmark",
@@ -93,6 +97,10 @@
               "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
             },
             {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{c6f34f0d-7ae5-4f3a-be61-fe0c21ae9eb8}"
+            },
+            {
               "$type": "Document",
               "DocumentIndex": 0,
               "Title": "ETLProcessForDWPubsSales.dtsx [Design]",
@@ -113,7 +121,8 @@
               "ToolTip": "D:\\NAIT\\Semester-4\\Business-intelligence\\workbook\\database-ex\\_BlSolutions\\PublicationsIndustries\\DWPubsSalesETL\\PublicationIndustriesETLCode.sql",
               "RelativeToolTip": "DWPubsSalesETL\\PublicationIndustriesETLCode.sql",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000826|",
-              "WhenOpened": "2026-10-14T19:07:28.033Z"
+              "WhenOpened": "2026-10-14T19:07:28.033Z",
+              "EditorCaption": ""
             }
           ]
         }

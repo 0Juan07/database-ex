@@ -3,6 +3,10 @@
   "WorkspaceRootPath": "D:\\NAIT\\Semester-4\\Business-intelligence\\workbook\\database-ex\\_BlSolutions\\PublicationsIndustries\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{A0CDB48F-33E7-38FF-60E5-84FC03992D53}|PubsBICubes\\PubsBICubes.dwproj|D:\\NAIT\\Semester-4\\Business-intelligence\\workbook\\database-ex\\_BlSolutions\\PublicationsIndustries\\PubsBICubes\\DWPubsSalesTables.dsv||{B4191D15-2D32-45F2-906F-E91BBAAA6059}|Design",
+      "RelativeMoniker": "D:0:0:{A0CDB48F-33E7-38FF-60E5-84FC03992D53}|PubsBICubes\\PubsBICubes.dwproj|solutionrelative:PubsBICubes\\DWPubsSalesTables.dsv||{B4191D15-2D32-45F2-906F-E91BBAAA6059}|Design"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{D04DD632-DFDD-A870-AF97-DB344F8253AA}|DWPubsSalesETL\\DWPubsSalesETL.dtproj|D:\\NAIT\\Semester-4\\Business-intelligence\\workbook\\database-ex\\_BlSolutions\\PublicationsIndustries\\DWPubsSalesETL\\ETLProcessForDWPubsSales.dtsx||{CC84AFBD-DA02-46F4-8623-9F07E5569EDB}|Design",
       "RelativeMoniker": "D:0:0:{D04DD632-DFDD-A870-AF97-DB344F8253AA}|DWPubsSalesETL\\DWPubsSalesETL.dtproj|solutionrelative:DWPubsSalesETL\\ETLProcessForDWPubsSales.dtsx||{CC84AFBD-DA02-46F4-8623-9F07E5569EDB}|Design"
     },
@@ -99,6 +103,22 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "DWPubsSalesTables.dsv [Design]",
+              "DocumentMoniker": "D:\\NAIT\\Semester-4\\Business-intelligence\\workbook\\database-ex\\_BlSolutions\\PublicationsIndustries\\PubsBICubes\\DWPubsSalesTables.dsv",
+              "RelativeDocumentMoniker": "PubsBICubes\\DWPubsSalesTables.dsv",
+              "ToolTip": "D:\\NAIT\\Semester-4\\Business-intelligence\\workbook\\database-ex\\_BlSolutions\\PublicationsIndustries\\PubsBICubes\\DWPubsSalesTables.dsv [Design]",
+              "RelativeToolTip": "PubsBICubes\\DWPubsSalesTables.dsv [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2026-10-20T22:22:31.344Z",
+              "EditorCaption": " [Design]"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{c6f34f0d-7ae5-4f3a-be61-fe0c21ae9eb8}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
               "Title": "ETLProcessForDWPubsSales.dtsx [Design]",
               "DocumentMoniker": "D:\\NAIT\\Semester-4\\Business-intelligence\\workbook\\database-ex\\_BlSolutions\\PublicationsIndustries\\DWPubsSalesETL\\ETLProcessForDWPubsSales.dtsx",
               "RelativeDocumentMoniker": "DWPubsSalesETL\\ETLProcessForDWPubsSales.dtsx",
@@ -110,7 +130,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "PublicationIndustriesETLCode.sql ",
               "DocumentMoniker": "D:\\NAIT\\Semester-4\\Business-intelligence\\workbook\\database-ex\\_BlSolutions\\PublicationsIndustries\\DWPubsSalesETL\\PublicationIndustriesETLCode.sql",
               "RelativeDocumentMoniker": "DWPubsSalesETL\\PublicationIndustriesETLCode.sql",

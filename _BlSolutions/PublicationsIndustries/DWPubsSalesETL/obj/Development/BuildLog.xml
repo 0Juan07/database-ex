@@ -2,13 +2,13 @@
 <BuildLog xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <ProjectInfo>
     <Name>DWPubsSalesETL</Name>
-    <LastWriteTime>2026-10-19T22:48:37.2593941Z</LastWriteTime>
+    <LastWriteTime>2026-10-19T23:00:09.8314946Z</LastWriteTime>
     <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
   </ProjectInfo>
   <LastBuildInfos>
     <ProjectBuildItemInfo>
       <Name>ETLProcessForDWPubsSales.dtsx</Name>
-      <LastWriteTime>2026-10-19T22:48:37.1738794Z</LastWriteTime>
+      <LastWriteTime>2026-10-19T23:23:31.9531221Z</LastWriteTime>
       <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
     </ProjectBuildItemInfo>
   </LastBuildInfos>
